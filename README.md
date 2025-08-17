@@ -1,26 +1,26 @@
 # Chat-Bot-A-Conversational-AI-with-Natural-Voice-Responses
 
-The Aim of the project to make a chat bot response as voice note with the help of open AI.
+## The Aim of the project to make a chat bot response as voice note with the help of open AI.
 
-Features
+## Features
 Enhances accessibility for users with visual impairments by delivering information effectively through voice.
 Provides a more engaging and pleasant interaction for users.
 The chatbot should be capable of recognizing and accurately pronouncing words and phrases in various languages.
 Allows the chatbot to adapt its tone to different scenarios, improving contextual relevance.
 This feature enables the chatbot to adopt different speech styles, such as formal, casual, or enthusiastic, based on the context of the conversation or user preferences.
 
-Requirements
+## Requirements
 Python 3.x
 Jupyter Notebook (Anaconda 3)
 Install the required packages
     1.Python 3.x
     2.Jupyter Notebook (Anaconda 3)
-Usage
+## Usage
 Create interactive FAQs on websites or applications where users can ask questions in text, and the chatbot responds with voice-generated answers, providing a more engaging user experience.
 Chatbots that can convert text-based customer queries into natural-sounding voice responses
 Improve e-learning experiences by incorporating text-to-voice generation, enabling chatbots to narrate lessons, provide instructions, and engage learners in a more dynamic and interactive manner.
 
-Program:
+## Program:
 Text to Voice
 
 !pip install langchain
@@ -134,5 +134,66 @@ demo = gr.ChatInterface(chat_bot_response,examples=["How are you doing?","What a
 if _name_ == "_main_":
     demo.launch() #To create a public link, set `share=True` in `launch()`. To enable errors and logs, set `debug=True` in `launch()`
 
+## OUTPUT    
+
 
 <img width="826" height="359" alt="image" src="https://github.com/user-attachments/assets/8e8c5b0a-1ba4-4027-b967-9245859fd9b3" />
+
+<img width="821" height="353" alt="image" src="https://github.com/user-attachments/assets/b678cb49-0fb3-40d5-a804-5e6bdbfc99bc" />
+
+## Text to Text
+
+!pip install langchain
+!pip install openai
+!pip install gradio
+!pip install huggingface_hub
+
+import os
+import gradio as gr
+from langchain.chat_models import ChatOpenAI
+from langchain import LLMChain, PromptTemplate
+from langchain.memory import ConversationBufferMemory
+
+OPENAI_API_KEY="OPENAI_API_KEY"
+os.environ["OPENAI_API_KEY"] = OPENAI_API_KEY
+
+template = """You are a helpful assistant to answer user queries.
+{chat_history}
+User: {user_message}
+Chatbot:"""
+
+prompt = PromptTemplate(
+    input_variables=["chat_history", "user_message"], template=template
+)
+
+memory = ConversationBufferMemory(memory_key="chat_history")
+
+# from langchain.llms import HuggingFacePipeline
+# hf = HuggingFacePipeline.from_model_id(
+#     model_id="gpt2",
+#     task="text-generation",)
+
+llm_chain = LLMChain(
+    llm=ChatOpenAI(temperature='0.5', model_name="gpt-3.5-turbo"),
+    prompt=prompt,
+    verbose=True,
+    memory=memory,
+)
+
+def get_text_response(user_message,history):
+    response = llm_chain.predict(user_message = user_message)
+    return response
+
+demo = gr.ChatInterface(get_text_response, examples=["How are you doing?","What are your interests?","Which places do you like to visit?"])
+
+if _name_ == "_main_":
+    demo.launch() #To create a public link, set `share=True` in `launch()`. To enable errors and logs, set `debug=True` in `launch()`
+
+# OUTPUT
+<img width="807" height="234" alt="image" src="https://github.com/user-attachments/assets/a4a707c4-78ac-4796-b9c3-4405837be3f2" />
+
+
+
+# RESULT:
+The project successfully created a chatbot capable of generating voice responses for user prompts, enhancing the interactive and dynamic nature of conversations. This implementation brings a new dimension to user engagement by providing spoken responses tailored to the queries posed. The project's achievement lies in combining chatbot functionality with voice synthesis to create a seamless and natural conversational experience.
+
