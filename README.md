@@ -22,12 +22,12 @@ Improve e-learning experiences by incorporating text-to-voice generation, enabli
 
 ## Program:
 Text to Voice
-*/
+```
 !pip install langchain
 !pip install openai
 !pip install gradio
 !pip install huggingface_hub
-*/
+
 
 import os
 import re
@@ -134,7 +134,7 @@ demo = gr.ChatInterface(chat_bot_response,examples=["How are you doing?","What a
 
 if _name_ == "_main_":
     demo.launch() #To create a public link, set `share=True` in `launch()`. To enable errors and logs, set `debug=True` in `launch()`
-    /*
+```
 
 ## OUTPUT    
 
@@ -144,7 +144,7 @@ if _name_ == "_main_":
 <img width="821" height="353" alt="image" src="https://github.com/user-attachments/assets/b678cb49-0fb3-40d5-a804-5e6bdbfc99bc" />
 
 ## Text to Text
-
+```
 !pip install langchain
 !pip install openai
 !pip install gradio
@@ -190,6 +190,7 @@ demo = gr.ChatInterface(get_text_response, examples=["How are you doing?","What 
 
 if _name_ == "_main_":
     demo.launch() #To create a public link, set `share=True` in `launch()`. To enable errors and logs, set `debug=True` in `launch()`
+```
 
 # OUTPUT
 <img width="807" height="234" alt="image" src="https://github.com/user-attachments/assets/a4a707c4-78ac-4796-b9c3-4405837be3f2" />
